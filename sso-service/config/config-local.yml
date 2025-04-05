@@ -1,0 +1,11 @@
+app:
+  env: development
+  grpc:
+    timeout: 1m
+    port: 440444  
+  jwt_token_ttl: 1h
+
+postgres:                     
+  max_pool_size: 50
+  conn_timeout: 10s
+  driver: pgx
