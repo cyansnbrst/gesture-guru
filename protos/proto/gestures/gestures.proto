@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+package gestures;
+
+option go_package = "cyansnbrst.sso.v1;ssov1";
+
+// Gestures is service for managing gestures database.
+service GesturesService {
+    rpc GetByID(GetGestureByIDRequest) returns (GetGestureByIDResponse);
+    rpc GetAll(GetAllGesturesRequest) returns (GetAllGesturesResponse);
+    rpc Create(CreateGestureRequest) returns (CreateGestureResponse);
+    rpc Update(UpdateGestureRequest) returns (UpdateGestureResponse);
+    rpc Delete(DeleteGestureRequest) returns (DeleteGestureResponse);
+}
+
+message Gesture {
+    int64 id = 1;
+    string name = 2;
+    string description = 3;
+    string video_url = 4;
+    int64 category_id = 5;
+    string created_at = 6; // ISO-8601 string.
+}
+
+message GetGestureByIDRequest {
+    int64 id = 1;
+}
+
+message GetGestureByIDResponse {
+    Gesture gesture = 1;
+}
+
+message GetAllGesturesRequest {}
+
+message GetAllGesturesResponse {
+    repeated Gesture gestures = 1;
+}
+
+message CreateGestureRequest {
+    string name = 1;
+    string description = 2;
+    string video_url = 3;
+    int64 category_id = 4;
+}
+
+message CreateGestureResponse {
+    int64 id = 1;
+}
+
+message UpdateGestureRequest {
+    int64 id = 1;
+    string name = 2;
+    string description = 3;
+    string video_url = 4;
+    int64 category_id = 5;
+}
+
+message UpdateGestureResponse {}
+
+message DeleteGestureRequest {
+    int64 id = 1;
+}
+
+message DeleteGestureResponse {}
