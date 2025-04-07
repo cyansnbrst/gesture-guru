@@ -4,7 +4,7 @@
 // - protoc             v6.30.2
 // source: gestures/gestures.proto
 
-package ssov1
+package gesturesv1
 
 import (
 	context "context"

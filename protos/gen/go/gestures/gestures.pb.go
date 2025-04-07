@@ -4,7 +4,7 @@
 // 	protoc        v6.30.2
 // source: gestures/gestures.proto
 
-package ssov1
+package gesturesv1
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -622,7 +622,7 @@ const file_gestures_gestures_proto_rawDesc = "" +
 	"\x06GetAll\x12\x1f.gestures.GetAllGesturesRequest\x1a .gestures.GetAllGesturesResponse\x12I\n" +
 	"\x06Create\x12\x1e.gestures.CreateGestureRequest\x1a\x1f.gestures.CreateGestureResponse\x12I\n" +
 	"\x06Update\x12\x1e.gestures.UpdateGestureRequest\x1a\x1f.gestures.UpdateGestureResponse\x12I\n" +
-	"\x06Delete\x12\x1e.gestures.DeleteGestureRequest\x1a\x1f.gestures.DeleteGestureResponseB\x19Z\x17cyansnbrst.sso.v1;ssov1b\x06proto3"
+	"\x06Delete\x12\x1e.gestures.DeleteGestureRequest\x1a\x1f.gestures.DeleteGestureResponseB#Z!cyansnbrst.gestures.v1;gesturesv1b\x06proto3"
 
 var (
 	file_gestures_gestures_proto_rawDescOnce sync.Once

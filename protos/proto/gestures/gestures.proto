@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package gestures;
 
-option go_package = "cyansnbrst.sso.v1;ssov1";
+option go_package = "cyansnbrst.gestures.v1;gesturesv1";
 
 // Gestures is service for managing gestures database.
 service GesturesService {
