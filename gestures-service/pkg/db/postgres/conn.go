@@ -6,7 +6,7 @@ import (
 
 	"github.com/jackc/pgx/v5/pgxpool"
 
-	"cyansnbrst/gestures-service/config"
+	"github.com/cyansnbrst/gesture-guru/gestures-service/config"
 )
 
 // New postgres connection pool

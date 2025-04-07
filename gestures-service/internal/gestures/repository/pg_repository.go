@@ -83,10 +83,6 @@ func (r *gesturesRepo) GetAll(ctx context.Context) ([]models.Gesture, error) {
 		gestures = append(gestures, gesture)
 	}
 
-	if len(gestures) == 0 {
-		return nil, fmt.Errorf("%s: %w", op, db.ErrGestureNotFound)
-	}
-
 	return gestures, nil
 }
 
@@ -101,9 +97,7 @@ func (r *gesturesRepo) Create(ctx context.Context, gesture *models.Gesture) (int
 	`
 
 	var id int64
-	err := r.db.QueryRow(
-		ctx,
-		query,
+	err := r.db.QueryRow(ctx, query,
 		gesture.Name,
 		gesture.Description,
 		gesture.VideoURL,
@@ -132,9 +126,7 @@ func (r *gesturesRepo) Update(ctx context.Context, gesture *models.Gesture) erro
 	`
 
 	var updatedID int64
-	err := r.db.QueryRow(
-		ctx,
-		query,
+	err := r.db.QueryRow(ctx, query,
 		gesture.Name,
 		gesture.Description,
 		gesture.VideoURL,
@@ -142,8 +134,11 @@ func (r *gesturesRepo) Update(ctx context.Context, gesture *models.Gesture) erro
 		gesture.ID,
 	).Scan(&updatedID)
 	if err != nil {
+		var pgErr *pgconn.PgError
 		if errors.Is(err, pgx.ErrNoRows) {
 			return fmt.Errorf("%s: %w", op, db.ErrGestureNotFound)
+		} else if errors.As(err, &pgErr) && pgErr.Code == "23503" {
+			return fmt.Errorf("%s: %w", op, db.ErrInvalidCategory)
 		}
 		return fmt.Errorf("%s: %w", op, err)
 	}

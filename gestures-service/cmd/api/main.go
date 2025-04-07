@@ -5,13 +5,13 @@ import (
 
 	"go.uber.org/zap"
 
-	"cyansnbrst/gestures-service/config"
-	"cyansnbrst/gestures-service/internal/server"
-	"cyansnbrst/gestures-service/pkg/db/postgres"
+	"github.com/cyansnbrst/gesture-guru/gestures-service/config"
+	"github.com/cyansnbrst/gesture-guru/gestures-service/internal/app"
+	"github.com/cyansnbrst/gesture-guru/gestures-service/pkg/db/postgres"
 )
 
 func main() {
-	log.Println("starting gestures-service server")
+	log.Println("starting sso-service server")
 
 	cfg, err := config.LoadConfig("config/config-local.yml")
 	if err != nil {
@@ -35,16 +35,8 @@ func main() {
 	defer psqlDB.Close()
 	logger.Info("database connected")
 
-	// redisClient := redis.NewRedisClient(cfg)
-	// defer func() {
-	// 	if err := redisClient.Close(); err != nil {
-	// 		logger.Warn("failed to close redis", zap.String("error", err.Error()))
-	// 	}
-	// }()
-	// logger.Info("redis connected")
-
-	s := server.NewServer(cfg, logger, psqlDB)
-	if err = s.Run(); err != nil {
+	a := app.NewApp(cfg, logger, psqlDB)
+	if err = a.Run(); err != nil {
 		logger.Fatal("an error occurred", zap.String("error", err.Error()))
 	}
 }

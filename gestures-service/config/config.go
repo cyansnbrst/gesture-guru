@@ -16,12 +16,16 @@ type Config struct {
 
 // App config struct
 type App struct {
-	HTTPPort        int64         `yaml:"http_port" env:"APP_HTTP_PORT" env-required:"true"`
-	Env             string        `yaml:"env" env:"APP_ENV" env-required:"true"`
-	IdleTimeout     time.Duration `yaml:"idle_timeout" env:"APP_IDLE_TIMEOUT" env-required:"true"`
-	ReadTimeout     time.Duration `yaml:"read_timeout" env:"APP_READ_TIMEOUT" env-required:"true"`
-	WriteTimeout    time.Duration `yaml:"write_timeout" env:"APP_WRITE_TIMEOUT" env-required:"true"`
-	ShutdownTimeout time.Duration `yaml:"shutdown_timeout" env:"APP_SHUTDOWN_TIMEOUT" env-required:"true"`
+	Env          string        `yaml:"env" env:"APP_ENV" env-default:"development"`
+	GRPC         GRPC          `yaml:"grpc"`
+	JWTTokenTTL  time.Duration `yaml:"jwt_token_ttl" env:"JWT_TOKEN_TTL" env-default:"1h"`
+	JWTSecretKey string        `env:"JWT_SECRET_KEY" env-required:"true"`
+}
+
+// GRPC server config struct
+type GRPC struct {
+	Port    int64         `yaml:"port" env:"GRPC_PORT" env-required:"true"`
+	Timeout time.Duration `yaml:"timeout" env:"GRPC_TIMEOUT" env-required:"true"`
 }
 
 // PostgreSQL config struct
