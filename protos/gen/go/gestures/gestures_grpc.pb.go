@@ -19,19 +19,19 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	GesturesService_GetByID_FullMethodName = "/gestures.GesturesService/GetByID"
-	GesturesService_GetAll_FullMethodName  = "/gestures.GesturesService/GetAll"
-	GesturesService_Create_FullMethodName  = "/gestures.GesturesService/Create"
-	GesturesService_Update_FullMethodName  = "/gestures.GesturesService/Update"
-	GesturesService_Delete_FullMethodName  = "/gestures.GesturesService/Delete"
+	Gestures_GetByID_FullMethodName = "/gestures.Gestures/GetByID"
+	Gestures_GetAll_FullMethodName  = "/gestures.Gestures/GetAll"
+	Gestures_Create_FullMethodName  = "/gestures.Gestures/Create"
+	Gestures_Update_FullMethodName  = "/gestures.Gestures/Update"
+	Gestures_Delete_FullMethodName  = "/gestures.Gestures/Delete"
 )
 
-// GesturesServiceClient is the client API for GesturesService service.
+// GesturesClient is the client API for Gestures service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
 // Gestures is service for managing gestures database.
-type GesturesServiceClient interface {
+type GesturesClient interface {
 	GetByID(ctx context.Context, in *GetGestureByIDRequest, opts ...grpc.CallOption) (*GetGestureByIDResponse, error)
 	GetAll(ctx context.Context, in *GetAllGesturesRequest, opts ...grpc.CallOption) (*GetAllGesturesResponse, error)
 	Create(ctx context.Context, in *CreateGestureRequest, opts ...grpc.CallOption) (*CreateGestureResponse, error)
@@ -39,237 +39,237 @@ type GesturesServiceClient interface {
 	Delete(ctx context.Context, in *DeleteGestureRequest, opts ...grpc.CallOption) (*DeleteGestureResponse, error)
 }
 
-type gesturesServiceClient struct {
+type gesturesClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewGesturesServiceClient(cc grpc.ClientConnInterface) GesturesServiceClient {
-	return &gesturesServiceClient{cc}
+func NewGesturesClient(cc grpc.ClientConnInterface) GesturesClient {
+	return &gesturesClient{cc}
 }
 
-func (c *gesturesServiceClient) GetByID(ctx context.Context, in *GetGestureByIDRequest, opts ...grpc.CallOption) (*GetGestureByIDResponse, error) {
+func (c *gesturesClient) GetByID(ctx context.Context, in *GetGestureByIDRequest, opts ...grpc.CallOption) (*GetGestureByIDResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetGestureByIDResponse)
-	err := c.cc.Invoke(ctx, GesturesService_GetByID_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Gestures_GetByID_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *gesturesServiceClient) GetAll(ctx context.Context, in *GetAllGesturesRequest, opts ...grpc.CallOption) (*GetAllGesturesResponse, error) {
+func (c *gesturesClient) GetAll(ctx context.Context, in *GetAllGesturesRequest, opts ...grpc.CallOption) (*GetAllGesturesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetAllGesturesResponse)
-	err := c.cc.Invoke(ctx, GesturesService_GetAll_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Gestures_GetAll_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *gesturesServiceClient) Create(ctx context.Context, in *CreateGestureRequest, opts ...grpc.CallOption) (*CreateGestureResponse, error) {
+func (c *gesturesClient) Create(ctx context.Context, in *CreateGestureRequest, opts ...grpc.CallOption) (*CreateGestureResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreateGestureResponse)
-	err := c.cc.Invoke(ctx, GesturesService_Create_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Gestures_Create_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *gesturesServiceClient) Update(ctx context.Context, in *UpdateGestureRequest, opts ...grpc.CallOption) (*UpdateGestureResponse, error) {
+func (c *gesturesClient) Update(ctx context.Context, in *UpdateGestureRequest, opts ...grpc.CallOption) (*UpdateGestureResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateGestureResponse)
-	err := c.cc.Invoke(ctx, GesturesService_Update_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Gestures_Update_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *gesturesServiceClient) Delete(ctx context.Context, in *DeleteGestureRequest, opts ...grpc.CallOption) (*DeleteGestureResponse, error) {
+func (c *gesturesClient) Delete(ctx context.Context, in *DeleteGestureRequest, opts ...grpc.CallOption) (*DeleteGestureResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DeleteGestureResponse)
-	err := c.cc.Invoke(ctx, GesturesService_Delete_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Gestures_Delete_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// GesturesServiceServer is the server API for GesturesService service.
-// All implementations must embed UnimplementedGesturesServiceServer
+// GesturesServer is the server API for Gestures service.
+// All implementations must embed UnimplementedGesturesServer
 // for forward compatibility.
 //
 // Gestures is service for managing gestures database.
-type GesturesServiceServer interface {
+type GesturesServer interface {
 	GetByID(context.Context, *GetGestureByIDRequest) (*GetGestureByIDResponse, error)
 	GetAll(context.Context, *GetAllGesturesRequest) (*GetAllGesturesResponse, error)
 	Create(context.Context, *CreateGestureRequest) (*CreateGestureResponse, error)
 	Update(context.Context, *UpdateGestureRequest) (*UpdateGestureResponse, error)
 	Delete(context.Context, *DeleteGestureRequest) (*DeleteGestureResponse, error)
-	mustEmbedUnimplementedGesturesServiceServer()
+	mustEmbedUnimplementedGesturesServer()
 }
 
-// UnimplementedGesturesServiceServer must be embedded to have
+// UnimplementedGesturesServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedGesturesServiceServer struct{}
+type UnimplementedGesturesServer struct{}
 
-func (UnimplementedGesturesServiceServer) GetByID(context.Context, *GetGestureByIDRequest) (*GetGestureByIDResponse, error) {
+func (UnimplementedGesturesServer) GetByID(context.Context, *GetGestureByIDRequest) (*GetGestureByIDResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetByID not implemented")
 }
-func (UnimplementedGesturesServiceServer) GetAll(context.Context, *GetAllGesturesRequest) (*GetAllGesturesResponse, error) {
+func (UnimplementedGesturesServer) GetAll(context.Context, *GetAllGesturesRequest) (*GetAllGesturesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAll not implemented")
 }
-func (UnimplementedGesturesServiceServer) Create(context.Context, *CreateGestureRequest) (*CreateGestureResponse, error) {
+func (UnimplementedGesturesServer) Create(context.Context, *CreateGestureRequest) (*CreateGestureResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
-func (UnimplementedGesturesServiceServer) Update(context.Context, *UpdateGestureRequest) (*UpdateGestureResponse, error) {
+func (UnimplementedGesturesServer) Update(context.Context, *UpdateGestureRequest) (*UpdateGestureResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
-func (UnimplementedGesturesServiceServer) Delete(context.Context, *DeleteGestureRequest) (*DeleteGestureResponse, error) {
+func (UnimplementedGesturesServer) Delete(context.Context, *DeleteGestureRequest) (*DeleteGestureResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
-func (UnimplementedGesturesServiceServer) mustEmbedUnimplementedGesturesServiceServer() {}
-func (UnimplementedGesturesServiceServer) testEmbeddedByValue()                         {}
+func (UnimplementedGesturesServer) mustEmbedUnimplementedGesturesServer() {}
+func (UnimplementedGesturesServer) testEmbeddedByValue()                  {}
 
-// UnsafeGesturesServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to GesturesServiceServer will
+// UnsafeGesturesServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to GesturesServer will
 // result in compilation errors.
-type UnsafeGesturesServiceServer interface {
-	mustEmbedUnimplementedGesturesServiceServer()
+type UnsafeGesturesServer interface {
+	mustEmbedUnimplementedGesturesServer()
 }
 
-func RegisterGesturesServiceServer(s grpc.ServiceRegistrar, srv GesturesServiceServer) {
-	// If the following call pancis, it indicates UnimplementedGesturesServiceServer was
+func RegisterGesturesServer(s grpc.ServiceRegistrar, srv GesturesServer) {
+	// If the following call pancis, it indicates UnimplementedGesturesServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&GesturesService_ServiceDesc, srv)
+	s.RegisterService(&Gestures_ServiceDesc, srv)
 }
 
-func _GesturesService_GetByID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Gestures_GetByID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetGestureByIDRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GesturesServiceServer).GetByID(ctx, in)
+		return srv.(GesturesServer).GetByID(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GesturesService_GetByID_FullMethodName,
+		FullMethod: Gestures_GetByID_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GesturesServiceServer).GetByID(ctx, req.(*GetGestureByIDRequest))
+		return srv.(GesturesServer).GetByID(ctx, req.(*GetGestureByIDRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GesturesService_GetAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Gestures_GetAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetAllGesturesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GesturesServiceServer).GetAll(ctx, in)
+		return srv.(GesturesServer).GetAll(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GesturesService_GetAll_FullMethodName,
+		FullMethod: Gestures_GetAll_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GesturesServiceServer).GetAll(ctx, req.(*GetAllGesturesRequest))
+		return srv.(GesturesServer).GetAll(ctx, req.(*GetAllGesturesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GesturesService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Gestures_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateGestureRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GesturesServiceServer).Create(ctx, in)
+		return srv.(GesturesServer).Create(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GesturesService_Create_FullMethodName,
+		FullMethod: Gestures_Create_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GesturesServiceServer).Create(ctx, req.(*CreateGestureRequest))
+		return srv.(GesturesServer).Create(ctx, req.(*CreateGestureRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GesturesService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Gestures_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateGestureRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GesturesServiceServer).Update(ctx, in)
+		return srv.(GesturesServer).Update(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GesturesService_Update_FullMethodName,
+		FullMethod: Gestures_Update_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GesturesServiceServer).Update(ctx, req.(*UpdateGestureRequest))
+		return srv.(GesturesServer).Update(ctx, req.(*UpdateGestureRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GesturesService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Gestures_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteGestureRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GesturesServiceServer).Delete(ctx, in)
+		return srv.(GesturesServer).Delete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GesturesService_Delete_FullMethodName,
+		FullMethod: Gestures_Delete_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GesturesServiceServer).Delete(ctx, req.(*DeleteGestureRequest))
+		return srv.(GesturesServer).Delete(ctx, req.(*DeleteGestureRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// GesturesService_ServiceDesc is the grpc.ServiceDesc for GesturesService service.
+// Gestures_ServiceDesc is the grpc.ServiceDesc for Gestures service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var GesturesService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "gestures.GesturesService",
-	HandlerType: (*GesturesServiceServer)(nil),
+var Gestures_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "gestures.Gestures",
+	HandlerType: (*GesturesServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "GetByID",
-			Handler:    _GesturesService_GetByID_Handler,
+			Handler:    _Gestures_GetByID_Handler,
 		},
 		{
 			MethodName: "GetAll",
-			Handler:    _GesturesService_GetAll_Handler,
+			Handler:    _Gestures_GetAll_Handler,
 		},
 		{
 			MethodName: "Create",
-			Handler:    _GesturesService_Create_Handler,
+			Handler:    _Gestures_Create_Handler,
 		},
 		{
 			MethodName: "Update",
-			Handler:    _GesturesService_Update_Handler,
+			Handler:    _Gestures_Update_Handler,
 		},
 		{
 			MethodName: "Delete",
-			Handler:    _GesturesService_Delete_Handler,
+			Handler:    _Gestures_Delete_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

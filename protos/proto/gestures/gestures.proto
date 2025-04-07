@@ -5,7 +5,7 @@ package gestures;
 option go_package = "cyansnbrst.gestures.v1;gesturesv1";
 
 // Gestures is service for managing gestures database.
-service GesturesService {
+service Gestures {
     rpc GetByID(GetGestureByIDRequest) returns (GetGestureByIDResponse);
     rpc GetAll(GetAllGesturesRequest) returns (GetAllGesturesResponse);
     rpc Create(CreateGestureRequest) returns (CreateGestureResponse);

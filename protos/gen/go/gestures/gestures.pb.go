@@ -616,8 +616,8 @@ const file_gestures_gestures_proto_rawDesc = "" +
 	"\x15UpdateGestureResponse\"&\n" +
 	"\x14DeleteGestureRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\"\x17\n" +
-	"\x15DeleteGestureResponse2\x8d\x03\n" +
-	"\x0fGesturesService\x12L\n" +
+	"\x15DeleteGestureResponse2\x86\x03\n" +
+	"\bGestures\x12L\n" +
 	"\aGetByID\x12\x1f.gestures.GetGestureByIDRequest\x1a .gestures.GetGestureByIDResponse\x12K\n" +
 	"\x06GetAll\x12\x1f.gestures.GetAllGesturesRequest\x1a .gestures.GetAllGesturesResponse\x12I\n" +
 	"\x06Create\x12\x1e.gestures.CreateGestureRequest\x1a\x1f.gestures.CreateGestureResponse\x12I\n" +
@@ -653,16 +653,16 @@ var file_gestures_gestures_proto_goTypes = []any{
 var file_gestures_gestures_proto_depIdxs = []int32{
 	0,  // 0: gestures.GetGestureByIDResponse.gesture:type_name -> gestures.Gesture
 	0,  // 1: gestures.GetAllGesturesResponse.gestures:type_name -> gestures.Gesture
-	1,  // 2: gestures.GesturesService.GetByID:input_type -> gestures.GetGestureByIDRequest
-	3,  // 3: gestures.GesturesService.GetAll:input_type -> gestures.GetAllGesturesRequest
-	5,  // 4: gestures.GesturesService.Create:input_type -> gestures.CreateGestureRequest
-	7,  // 5: gestures.GesturesService.Update:input_type -> gestures.UpdateGestureRequest
-	9,  // 6: gestures.GesturesService.Delete:input_type -> gestures.DeleteGestureRequest
-	2,  // 7: gestures.GesturesService.GetByID:output_type -> gestures.GetGestureByIDResponse
-	4,  // 8: gestures.GesturesService.GetAll:output_type -> gestures.GetAllGesturesResponse
-	6,  // 9: gestures.GesturesService.Create:output_type -> gestures.CreateGestureResponse
-	8,  // 10: gestures.GesturesService.Update:output_type -> gestures.UpdateGestureResponse
-	10, // 11: gestures.GesturesService.Delete:output_type -> gestures.DeleteGestureResponse
+	1,  // 2: gestures.Gestures.GetByID:input_type -> gestures.GetGestureByIDRequest
+	3,  // 3: gestures.Gestures.GetAll:input_type -> gestures.GetAllGesturesRequest
+	5,  // 4: gestures.Gestures.Create:input_type -> gestures.CreateGestureRequest
+	7,  // 5: gestures.Gestures.Update:input_type -> gestures.UpdateGestureRequest
+	9,  // 6: gestures.Gestures.Delete:input_type -> gestures.DeleteGestureRequest
+	2,  // 7: gestures.Gestures.GetByID:output_type -> gestures.GetGestureByIDResponse
+	4,  // 8: gestures.Gestures.GetAll:output_type -> gestures.GetAllGesturesResponse
+	6,  // 9: gestures.Gestures.Create:output_type -> gestures.CreateGestureResponse
+	8,  // 10: gestures.Gestures.Update:output_type -> gestures.UpdateGestureResponse
+	10, // 11: gestures.Gestures.Delete:output_type -> gestures.DeleteGestureResponse
 	7,  // [7:12] is the sub-list for method output_type
 	2,  // [2:7] is the sub-list for method input_type
 	2,  // [2:2] is the sub-list for extension type_name

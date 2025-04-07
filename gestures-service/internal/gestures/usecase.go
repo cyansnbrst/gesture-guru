@@ -3,7 +3,7 @@ package gestures
 import (
 	"context"
 
-	"cyansnbrst/gestures-service/internal/models"
+	"github.com/cyansnbrst/gesture-guru/gestures-service/internal/models"
 )
 
 // Gestures usecase interface
