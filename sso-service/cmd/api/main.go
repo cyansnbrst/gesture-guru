@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	log.Println("starting admin-service server")
+	log.Println("starting sso-service server")
 
 	cfg, err := config.LoadConfig("config/config-local.yml")
 	if err != nil {
@@ -35,8 +35,8 @@ func main() {
 	defer psqlDB.Close()
 	logger.Info("database connected")
 
-	s := app.NewServer(cfg, logger, psqlDB)
-	if err = s.Run(); err != nil {
+	a := app.NewApp(cfg, logger, psqlDB)
+	if err = a.Run(); err != nil {
 		logger.Fatal("an error occurred", zap.String("error", err.Error()))
 	}
 }

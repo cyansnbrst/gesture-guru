@@ -48,10 +48,10 @@ func (r *authRepo) SaveUser(ctx context.Context, email string, passwordHash []by
 
 // GerUserByEmail returns user by email.
 func (r *authRepo) GetUserByEmail(ctx context.Context, email string) (*models.User, error) {
-	const op = "repository.SaveUser"
+	const op = "repository.GetUserByEmail"
 
 	query := `
-		SELECT id, email, password_hash, balance, created_at
+		SELECT id, email, password_hash, created_at
 		FROM users
 		WHERE email = $1
 	`

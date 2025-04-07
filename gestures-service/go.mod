@@ -1,4 +1,4 @@
-module cyansnbrst/gestures-service
+module github.com/cyansnbrst/gesture-guru/gestures-service
 
 go 1.23
 

@@ -80,6 +80,7 @@ func (uc *authUC) Register(ctx context.Context, email string, password string) (
 	return id, nil
 }
 
+// IsAdmin checks if user is admin.
 func (uc *authUC) IsAdmin(ctx context.Context, userID int64) (bool, error) {
 	const op = "Auth.IsAdmin"
 

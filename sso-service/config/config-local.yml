@@ -2,7 +2,7 @@ app:
   env: development
   grpc:
     timeout: 1m
-    port: 440444  
+    port: 5100 
   jwt_token_ttl: 1h
 
 postgres:                     

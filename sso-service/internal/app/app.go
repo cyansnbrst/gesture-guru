@@ -8,9 +8,12 @@ import (
 	"syscall"
 	"time"
 
+	grpc_recovery "github.com/grpc-ecosystem/go-grpc-middleware/recovery"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 
 	"github.com/cyansnbrst/gesture-guru/sso-service/config"
 )
@@ -23,7 +26,7 @@ type App struct {
 }
 
 // New app constructor
-func NewServer(cfg *config.Config, logger *zap.Logger, db *pgxpool.Pool) *App {
+func NewApp(cfg *config.Config, logger *zap.Logger, db *pgxpool.Pool) *App {
 	return &App{
 		config: cfg,
 		logger: logger,
@@ -33,22 +36,65 @@ func NewServer(cfg *config.Config, logger *zap.Logger, db *pgxpool.Pool) *App {
 
 // Run starts the app
 func (a *App) Run() error {
-	addr := fmt.Sprintf(":%d", a.config.App.GRPC.Port)
-	server := grpc.NewServer()
-
+	server := a.newGRPCServer()
 	a.RegisterServices(server)
 
-	listener, err := net.Listen("tcp", addr)
+	listener, err := a.createListener()
 	if err != nil {
-		return fmt.Errorf("failed to listen on %s: %w", addr, err)
+		return err
 	}
 
 	a.logger.Info("starting gRPC server",
-		zap.String("addr", addr),
+		zap.String("addr", listener.Addr().String()),
 		zap.String("env", a.config.App.Env),
 	)
 
-	shutDownError := make(chan error)
+	shutdownErr := a.handleGracefulShutdown(server)
+
+	if err := server.Serve(listener); err != nil {
+		return err
+	}
+
+	if err := <-shutdownErr; err != nil {
+		return err
+	}
+
+	a.logger.Info("stopped gRPC server",
+		zap.String("addr", listener.Addr().String()),
+	)
+
+	return nil
+}
+
+// New GRPC server with interceptors
+func (a *App) newGRPCServer() *grpc.Server {
+	recoveryOpts := []grpc_recovery.Option{
+		grpc_recovery.WithRecoveryHandler(func(p any) (err error) {
+			a.logger.Error("panic recovered", zap.Any("panic", p))
+			return status.Errorf(codes.Internal, "internal server error")
+		}),
+	}
+
+	return grpc.NewServer(
+		grpc.ChainUnaryInterceptor(
+			grpc_recovery.UnaryServerInterceptor(recoveryOpts...),
+		),
+	)
+}
+
+// Creates a listener
+func (a *App) createListener() (net.Listener, error) {
+	addr := fmt.Sprintf(":%d", a.config.App.GRPC.Port)
+	listener, err := net.Listen("tcp", addr)
+	if err != nil {
+		return nil, fmt.Errorf("failed to listen on %s: %w", addr, err)
+	}
+	return listener, nil
+}
+
+// Handles a server graceful shutdown
+func (a *App) handleGracefulShutdown(server *grpc.Server) <-chan error {
+	shutdownErr := make(chan error)
 
 	go func() {
 		quit := make(chan os.Signal, 1)
@@ -67,24 +113,12 @@ func (a *App) Run() error {
 
 		select {
 		case <-stopped:
-			shutDownError <- nil
+			shutdownErr <- nil
 		case <-time.After(a.config.App.GRPC.Timeout):
 			server.Stop()
-			shutDownError <- fmt.Errorf("forced shutdown after timeout")
+			shutdownErr <- fmt.Errorf("forced shutdown after timeout")
 		}
 	}()
 
-	if err := server.Serve(listener); err != nil {
-		return err
-	}
-
-	if err := <-shutDownError; err != nil {
-		return err
-	}
-
-	a.logger.Info("stopped gRPC server",
-		zap.String("addr", addr),
-	)
-
-	return nil
+	return shutdownErr
 }

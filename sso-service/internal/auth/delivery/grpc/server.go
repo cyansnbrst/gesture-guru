@@ -35,10 +35,6 @@ func (s *authServer) Login(ctx context.Context, in *ssov1.LoginRequest) (*ssov1.
 		return nil, status.Error(codes.InvalidArgument, "password is required")
 	}
 
-	if in.GetAppId() == 0 {
-		return nil, status.Error(codes.InvalidArgument, "app_id is required")
-	}
-
 	token, err := s.authUC.Login(ctx, in.GetEmail(), in.GetPassword())
 	if err != nil {
 		if errors.Is(err, usecase.ErrInvalidCredentials) {
