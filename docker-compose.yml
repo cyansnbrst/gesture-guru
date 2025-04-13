@@ -1,0 +1,48 @@
+services:
+  postgres:
+    image: postgres:14
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./db/init:/docker-entrypoint-initdb.d
+
+  sso-service:
+    build:
+      context: ./sso-service
+    container_name: sso-service
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./sso-service/.env
+    depends_on:
+      - postgres
+
+  gestures-service:
+    build:
+      context: ./gestures-service
+    container_name: gestures-service
+    ports:
+      - "3001:3001"
+    env_file:
+      - ./gestures-service/.env
+    depends_on:
+      - postgres
+      - sso-service
+
+  migrate:
+    image: migrate/migrate
+    container_name: migrate
+    entrypoint: [ "sh", "-c", "migrate -path /migrations/gestures-service -database postgres://user:password@postgres:5432/gestures?sslmode=disable up && migrate -path /migrations/sso-service -database postgres://user:password@postgres:5432/users?sslmode=disable up" ]
+    volumes:
+      - ./gestures-service/migrations:/migrations/gestures-service
+      - ./sso-service/migrations:/migrations/sso-service
+    depends_on:
+      - postgres
+
+volumes:
+  pg_data:

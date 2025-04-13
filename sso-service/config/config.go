@@ -16,15 +16,16 @@ type Config struct {
 
 // App config struct
 type App struct {
+	Name         string        `yaml:"name" env:"APP_NAME"`
 	Env          string        `yaml:"env" env:"APP_ENV" env-default:"development"`
 	GRPC         GRPC          `yaml:"grpc"`
 	JWTTokenTTL  time.Duration `yaml:"jwt_token_ttl" env:"JWT_TOKEN_TTL" env-default:"1h"`
-	JWTSecretKey string        `env:"JWT_SECRET_KEY" env-required:"true"`
+	JWTSecretKey string        `yaml:"jwt_secret_key" env-required:"true"`
 }
 
 // GRPC server config struct
 type GRPC struct {
-	Port    int64         `yaml:"port" env:"GRPC_PORT" env-required:"true"`
+	Port    int           `yaml:"port" env:"GRPC_PORT" env-required:"true"`
 	Timeout time.Duration `yaml:"timeout" env:"GRPC_TIMEOUT" env-required:"true"`
 }
 

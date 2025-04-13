@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 
-	gesturesv1 "github.com/cyansnbrst/gesture-guru/protos/gen/go/gestures"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -13,6 +12,7 @@ import (
 	"github.com/cyansnbrst/gesture-guru/gestures-service/internal/models"
 	"github.com/cyansnbrst/gesture-guru/gestures-service/pkg/db"
 	grpchelpers "github.com/cyansnbrst/gesture-guru/gestures-service/pkg/grpc_helpers"
+	gesturesv1 "github.com/cyansnbrst/gesture-guru/protos/gen/go/gestures"
 )
 
 type gesturesServer struct {

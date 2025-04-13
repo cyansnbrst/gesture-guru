@@ -18,7 +18,7 @@ type Config struct {
 type App struct {
 	Env          string `yaml:"env" env:"APP_ENV" env-default:"development"`
 	GRPC         GRPC   `yaml:"grpc"`
-	JWTSecretKey string `yaml:"jwt_secret_key" env-required:"true"`
+	JWTSecretKey string `env:"JWT_SECRET_KEY" env-required:"true"`
 }
 
 // GRPC server config struct
