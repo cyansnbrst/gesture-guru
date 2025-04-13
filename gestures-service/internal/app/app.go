@@ -16,6 +16,7 @@ import (
 	"google.golang.org/grpc/status"
 
 	"github.com/cyansnbrst/gesture-guru/gestures-service/config"
+	"github.com/cyansnbrst/gesture-guru/gestures-service/internal/interceptors"
 )
 
 // App struct
@@ -77,6 +78,7 @@ func (a *App) newGRPCServer() *grpc.Server {
 
 	return grpc.NewServer(
 		grpc.ChainUnaryInterceptor(
+			interceptors.UnaryAuthInterceptor(a.config.App.JWTSecretKey),
 			grpc_recovery.UnaryServerInterceptor(recoveryOpts...),
 		),
 	)

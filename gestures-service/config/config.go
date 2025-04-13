@@ -16,10 +16,9 @@ type Config struct {
 
 // App config struct
 type App struct {
-	Env          string        `yaml:"env" env:"APP_ENV" env-default:"development"`
-	GRPC         GRPC          `yaml:"grpc"`
-	JWTTokenTTL  time.Duration `yaml:"jwt_token_ttl" env:"JWT_TOKEN_TTL" env-default:"1h"`
-	JWTSecretKey string        `env:"JWT_SECRET_KEY" env-required:"true"`
+	Env          string `yaml:"env" env:"APP_ENV" env-default:"development"`
+	GRPC         GRPC   `yaml:"grpc"`
+	JWTSecretKey string `yaml:"jwt_secret_key" env-required:"true"`
 }
 
 // GRPC server config struct
@@ -30,7 +29,7 @@ type GRPC struct {
 
 // PostgreSQL config struct
 type PostgreSQL struct {
-	Host        string        `env:"POSTGRES_DOCKER_HOST" env-required:"true"`
+	Host        string        `env:"POSTGRES_HOST" env-required:"true" env-default:"localhost"`
 	Port        int64         `env:"POSTGRES_PORT" env-required:"true"`
 	User        string        `env:"POSTGRES_USER" env-required:"true"`
 	Password    string        `env:"POSTGRES_PASSWORD" env-required:"true"`

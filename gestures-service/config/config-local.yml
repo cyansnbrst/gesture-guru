@@ -2,8 +2,8 @@ app:
   env: development
   grpc:
     timeout: 1m
-    port: 5100 
-  jwt_token_ttl: 1h
+    port: 3001
+  jwt_secret_key: "cyansnbrst"
 
 postgres:                     
   max_pool_size: 50

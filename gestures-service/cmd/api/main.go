@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	log.Println("starting sso-service server")
+	log.Println("starting gestures-service server")
 
 	cfg, err := config.LoadConfig("config/config-local.yml")
 	if err != nil {

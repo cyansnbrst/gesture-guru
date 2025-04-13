@@ -58,6 +58,10 @@ func (s *gesturesServer) GetAll(ctx context.Context, req *gesturesv1.GetAllGestu
 
 // Create creates a new gesture
 func (s *gesturesServer) Create(ctx context.Context, req *gesturesv1.CreateGestureRequest) (*gesturesv1.CreateGestureResponse, error) {
+	if err := grpchelpers.RequireAdmin(ctx); err != nil {
+		return nil, err
+	}
+
 	if req.Name == "" {
 		return nil, status.Error(codes.InvalidArgument, "name is required")
 	}
@@ -86,6 +90,10 @@ func (s *gesturesServer) Create(ctx context.Context, req *gesturesv1.CreateGestu
 
 // Update updates an existing gesture
 func (s *gesturesServer) Update(ctx context.Context, req *gesturesv1.UpdateGestureRequest) (*gesturesv1.UpdateGestureResponse, error) {
+	if err := grpchelpers.RequireAdmin(ctx); err != nil {
+		return nil, err
+	}
+
 	if req.Id == 0 {
 		return nil, status.Error(codes.InvalidArgument, "id is required")
 	}
@@ -124,6 +132,10 @@ func (s *gesturesServer) Update(ctx context.Context, req *gesturesv1.UpdateGestu
 
 // Delete deletes a gesture by ID
 func (s *gesturesServer) Delete(ctx context.Context, req *gesturesv1.DeleteGestureRequest) (*gesturesv1.DeleteGestureResponse, error) {
+	if err := grpchelpers.RequireAdmin(ctx); err != nil {
+		return nil, err
+	}
+
 	if req.Id == 0 {
 		return nil, status.Error(codes.InvalidArgument, "id is required")
 	}
