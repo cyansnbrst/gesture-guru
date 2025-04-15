@@ -7,6 +7,7 @@
 package gesturesv1
 
 import (
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -581,7 +582,7 @@ var File_gestures_gestures_proto protoreflect.FileDescriptor
 
 const file_gestures_gestures_proto_rawDesc = "" +
 	"\n" +
-	"\x17gestures/gestures.proto\x12\bgestures\"\xac\x01\n" +
+	"\x17gestures/gestures.proto\x12\bgestures\x1a\x1cgoogle/api/annotations.proto\"\xac\x01\n" +
 	"\aGesture\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
@@ -616,10 +617,10 @@ const file_gestures_gestures_proto_rawDesc = "" +
 	"\x15UpdateGestureResponse\"&\n" +
 	"\x14DeleteGestureRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\"\x17\n" +
-	"\x15DeleteGestureResponse2\x86\x03\n" +
-	"\bGestures\x12L\n" +
-	"\aGetByID\x12\x1f.gestures.GetGestureByIDRequest\x1a .gestures.GetGestureByIDResponse\x12K\n" +
-	"\x06GetAll\x12\x1f.gestures.GetAllGesturesRequest\x1a .gestures.GetAllGesturesResponse\x12I\n" +
+	"\x15DeleteGestureResponse2\xb7\x03\n" +
+	"\bGestures\x12g\n" +
+	"\aGetByID\x12\x1f.gestures.GetGestureByIDRequest\x1a .gestures.GetGestureByIDResponse\"\x19\x82\xd3\xe4\x93\x02\x13\x12\x11/v1/gestures/{id}\x12a\n" +
+	"\x06GetAll\x12\x1f.gestures.GetAllGesturesRequest\x1a .gestures.GetAllGesturesResponse\"\x14\x82\xd3\xe4\x93\x02\x0e\x12\f/v1/gestures\x12I\n" +
 	"\x06Create\x12\x1e.gestures.CreateGestureRequest\x1a\x1f.gestures.CreateGestureResponse\x12I\n" +
 	"\x06Update\x12\x1e.gestures.UpdateGestureRequest\x1a\x1f.gestures.UpdateGestureResponse\x12I\n" +
 	"\x06Delete\x12\x1e.gestures.DeleteGestureRequest\x1a\x1f.gestures.DeleteGestureResponseB#Z!cyansnbrst.gestures.v1;gesturesv1b\x06proto3"
