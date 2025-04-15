@@ -3,7 +3,7 @@ module github.com/cyansnbrst/gesture-guru/api-gateway
 go 1.24.2
 
 require (
-	github.com/cyansnbrst/gesture-guru/protos v0.0.0-20250415130602-41aa9b5b0e9c
+	github.com/cyansnbrst/gesture-guru/protos v0.0.0-20250415131947-469f09496316
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.26.3
 	google.golang.org/grpc v1.71.1
 )
