@@ -8,6 +8,8 @@ github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDk
 github.com/cncf/udpa/go v0.0.0-20191209042840-269d4d468f6f/go.mod h1:M8M6+tZqaGXZJjfX53e64911xZQV5JYwmTeXPW+k8Sc=
 github.com/cyansnbrst/gesture-guru/protos v0.0.0-20250407144221-e356f162735a h1:DjDZ0kpHpZXYGdM9e8MiTjdaPkyWmdLoYdgVdCpgOHo=
 github.com/cyansnbrst/gesture-guru/protos v0.0.0-20250407144221-e356f162735a/go.mod h1:XWOzn19IPSprJCFyGP1lmgrsZdLpHsDMXmmLC0GcpRw=
+github.com/cyansnbrst/gesture-guru/protos v0.0.0-20250413203040-be7bcf33fca1 h1:Gyu0+emu5BT3+UqUdQRxyAfx33Y404OPigQ6YwO4PlQ=
+github.com/cyansnbrst/gesture-guru/protos v0.0.0-20250413203040-be7bcf33fca1/go.mod h1:XWOzn19IPSprJCFyGP1lmgrsZdLpHsDMXmmLC0GcpRw=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=

@@ -11,5 +11,5 @@ import (
 func (a *App) RegisterServices(server *grpc.Server) {
 	gesturesRepo := repository.NewGesturesRepo(a.db)
 	gesturesUC := usecase.NewGesturesUseCase(a.logger, gesturesRepo)
-	grpcapp.NewGesturesServer(server, gesturesUC)
+	grpcapp.NewGesturesServer(server, gesturesUC, a.logger)
 }

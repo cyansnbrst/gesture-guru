@@ -4,7 +4,6 @@ app:
   grpc:
     timeout: 1m
     port: 3000 
-  jwt_secret_key: "cyansnbrst"
   jwt_token_ttl: 1h
 
 postgres:                     

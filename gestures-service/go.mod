@@ -5,7 +5,7 @@ go 1.24
 toolchain go1.24.2
 
 require (
-	github.com/cyansnbrst/gesture-guru/protos v0.0.0-20250407144221-e356f162735a
+	github.com/cyansnbrst/gesture-guru/protos v0.0.0-20250413203040-be7bcf33fca1
 	github.com/golang-jwt/jwt/v5 v5.2.2
 	github.com/grpc-ecosystem/go-grpc-middleware v1.4.0
 	github.com/ilyakaznacheev/cleanenv v1.5.0
