@@ -617,13 +617,13 @@ const file_gestures_gestures_proto_rawDesc = "" +
 	"\x15UpdateGestureResponse\"&\n" +
 	"\x14DeleteGestureRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\"\x17\n" +
-	"\x15DeleteGestureResponse2\xb7\x03\n" +
+	"\x15DeleteGestureResponse2\x89\x04\n" +
 	"\bGestures\x12g\n" +
 	"\aGetByID\x12\x1f.gestures.GetGestureByIDRequest\x1a .gestures.GetGestureByIDResponse\"\x19\x82\xd3\xe4\x93\x02\x13\x12\x11/v1/gestures/{id}\x12a\n" +
-	"\x06GetAll\x12\x1f.gestures.GetAllGesturesRequest\x1a .gestures.GetAllGesturesResponse\"\x14\x82\xd3\xe4\x93\x02\x0e\x12\f/v1/gestures\x12I\n" +
-	"\x06Create\x12\x1e.gestures.CreateGestureRequest\x1a\x1f.gestures.CreateGestureResponse\x12I\n" +
-	"\x06Update\x12\x1e.gestures.UpdateGestureRequest\x1a\x1f.gestures.UpdateGestureResponse\x12I\n" +
-	"\x06Delete\x12\x1e.gestures.DeleteGestureRequest\x1a\x1f.gestures.DeleteGestureResponseB#Z!cyansnbrst.gestures.v1;gesturesv1b\x06proto3"
+	"\x06GetAll\x12\x1f.gestures.GetAllGesturesRequest\x1a .gestures.GetAllGesturesResponse\"\x14\x82\xd3\xe4\x93\x02\x0e\x12\f/v1/gestures\x12b\n" +
+	"\x06Create\x12\x1e.gestures.CreateGestureRequest\x1a\x1f.gestures.CreateGestureResponse\"\x17\x82\xd3\xe4\x93\x02\x11:\x01*\"\f/v1/gestures\x12g\n" +
+	"\x06Update\x12\x1e.gestures.UpdateGestureRequest\x1a\x1f.gestures.UpdateGestureResponse\"\x1c\x82\xd3\xe4\x93\x02\x16:\x01*\"\x11/v1/gestures/{id}\x12d\n" +
+	"\x06Delete\x12\x1e.gestures.DeleteGestureRequest\x1a\x1f.gestures.DeleteGestureResponse\"\x19\x82\xd3\xe4\x93\x02\x13*\x11/v1/gestures/{id}B#Z!cyansnbrst.gestures.v1;gesturesv1b\x06proto3"
 
 var (
 	file_gestures_gestures_proto_rawDescOnce sync.Once

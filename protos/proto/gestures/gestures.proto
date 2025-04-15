@@ -18,9 +18,23 @@ service Gestures {
             get: "/v1/gestures"
         };
     };
-    rpc Create(CreateGestureRequest) returns (CreateGestureResponse);
-    rpc Update(UpdateGestureRequest) returns (UpdateGestureResponse);
-    rpc Delete(DeleteGestureRequest) returns (DeleteGestureResponse);
+    rpc Create(CreateGestureRequest) returns (CreateGestureResponse) {
+        option (google.api.http) = {
+            post: "/v1/gestures"
+            body: "*"
+        };
+    };
+    rpc Update(UpdateGestureRequest) returns (UpdateGestureResponse) {
+        option (google.api.http) = {
+            post: "/v1/gestures/{id}"
+            body: "*"
+        };
+    };
+    rpc Delete(DeleteGestureRequest) returns (DeleteGestureResponse) {
+        option (google.api.http) = {
+            delete: "/v1/gestures/{id}"
+        };
+    };
 }
 
 message Gesture {

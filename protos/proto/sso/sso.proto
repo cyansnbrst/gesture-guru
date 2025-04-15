@@ -11,16 +11,15 @@ service Auth {
     // Register registers a new user.
     rpc Register (RegisterRequest) returns (RegisterResponse) {
       option (google.api.http) = {
-        post: "/v1/register"
-        body: "*"
+			post: "/v1/register"
+			body: "*"
       };
     };
-    
     // Login logs in a user and returns an auth token.
     rpc Login (LoginRequest) returns (LoginResponse) {
-      option (google.api.http) = {
-        post: "/v1/login"
-        body: "*"
+      	option (google.api.http) = {
+			post: "/v1/login"
+        	body: "*"
       };
     };
     // IsAdmin checks whether a user is an admin.
