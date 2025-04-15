@@ -17,14 +17,14 @@ func main() {
 
 	opts := []grpc.DialOption{grpc.WithInsecure()}
 
-	err := gesturesv1.RegisterGesturesHandlerFromEndpoint(ctx, mux, "gestures-service:3001", opts)
+	err := gesturesv1.RegisterGesturesHandlerFromEndpoint(ctx, mux, "localhost:3001", opts)
 	if err != nil {
-		log.Fatalf("failed to register Gestures: %v", err)
+		log.Fatalf("failed to register gestures: %v", err)
 	}
 
-	err = ssov1.RegisterAuthHandlerFromEndpoint(ctx, mux, "sso-service:3000", opts)
+	err = ssov1.RegisterAuthHandlerFromEndpoint(ctx, mux, "localhost:3000", opts)
 	if err != nil {
-		log.Fatalf("failed to register Auth: %v", err)
+		log.Fatalf("failed to register auth: %v", err)
 	}
 
 	log.Println("API Gateway started on :8080")

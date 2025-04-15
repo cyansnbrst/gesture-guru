@@ -12,6 +12,7 @@ service Auth {
     rpc Register (RegisterRequest) returns (RegisterResponse) {
       option (google.api.http) = {
         post: "/v1/register"
+        body: "*"
       };
     };
     
@@ -19,11 +20,12 @@ service Auth {
     rpc Login (LoginRequest) returns (LoginResponse) {
       option (google.api.http) = {
         post: "/v1/login"
+        body: "*"
       };
     };
     // IsAdmin checks whether a user is an admin.
     rpc IsAdmin (IsAdminRequest) returns (IsAdminResponse);
-  }
+}
 
 message IsAdminRequest {
     int64 user_id = 1; // User ID to validate.

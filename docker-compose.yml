@@ -34,6 +34,16 @@ services:
       - postgres
       - sso-service
 
+  api-gateway:
+    build:
+      context: ./api-gateway
+    container_name: api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - gestures-service
+      - sso-service
+
   migrate:
     image: migrate/migrate
     container_name: migrate
