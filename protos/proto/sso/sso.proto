@@ -4,12 +4,23 @@ package auth;
 
 option go_package = "cyansnbrst.sso.v1;ssov1";
 
+import "google/api/annotations.proto";
+
 // Auth is service for managing permissions and roles.
 service Auth {
     // Register registers a new user.
-    rpc Register (RegisterRequest) returns (RegisterResponse);
+    rpc Register (RegisterRequest) returns (RegisterResponse) {
+      option (google.api.http) = {
+        post: "/v1/register"
+      };
+    };
+    
     // Login logs in a user and returns an auth token.
-    rpc Login (LoginRequest) returns (LoginResponse);
+    rpc Login (LoginRequest) returns (LoginResponse) {
+      option (google.api.http) = {
+        post: "/v1/login"
+      };
+    };
     // IsAdmin checks whether a user is an admin.
     rpc IsAdmin (IsAdminRequest) returns (IsAdminResponse);
   }

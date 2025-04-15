@@ -4,10 +4,20 @@ package gestures;
 
 option go_package = "cyansnbrst.gestures.v1;gesturesv1";
 
+import "google/api/annotations.proto";
+
 // Gestures is service for managing gestures database.
 service Gestures {
-    rpc GetByID(GetGestureByIDRequest) returns (GetGestureByIDResponse);
-    rpc GetAll(GetAllGesturesRequest) returns (GetAllGesturesResponse);
+    rpc GetByID(GetGestureByIDRequest) returns (GetGestureByIDResponse) {
+        option (google.api.http) = {
+            get: "/v1/gestures/{id}"
+        };
+    };
+    rpc GetAll(GetAllGesturesRequest) returns (GetAllGesturesResponse) {
+        option (google.api.http) = {
+            get: "/v1/gestures"
+        };
+    };
     rpc Create(CreateGestureRequest) returns (CreateGestureResponse);
     rpc Update(UpdateGestureRequest) returns (UpdateGestureResponse);
     rpc Delete(DeleteGestureRequest) returns (DeleteGestureResponse);
