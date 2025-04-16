@@ -28,7 +28,7 @@ type Gesture struct {
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	VideoUrl      string                 `protobuf:"bytes,4,opt,name=video_url,json=videoUrl,proto3" json:"video_url,omitempty"`
-	CategoryId    int64                  `protobuf:"varint,5,opt,name=category_id,json=categoryId,proto3" json:"category_id,omitempty"`
+	Category      *Category              `protobuf:"bytes,5,opt,name=category,proto3" json:"category,omitempty"`
 	CreatedAt     string                 `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"` // ISO-8601 string.
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -92,16 +92,68 @@ func (x *Gesture) GetVideoUrl() string {
 	return ""
 }
 
-func (x *Gesture) GetCategoryId() int64 {
+func (x *Gesture) GetCategory() *Category {
 	if x != nil {
-		return x.CategoryId
+		return x.Category
 	}
-	return 0
+	return nil
 }
 
 func (x *Gesture) GetCreatedAt() string {
 	if x != nil {
 		return x.CreatedAt
+	}
+	return ""
+}
+
+type Category struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Category) Reset() {
+	*x = Category{}
+	mi := &file_gestures_gestures_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Category) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Category) ProtoMessage() {}
+
+func (x *Category) ProtoReflect() protoreflect.Message {
+	mi := &file_gestures_gestures_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Category.ProtoReflect.Descriptor instead.
+func (*Category) Descriptor() ([]byte, []int) {
+	return file_gestures_gestures_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *Category) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *Category) GetName() string {
+	if x != nil {
+		return x.Name
 	}
 	return ""
 }
@@ -115,7 +167,7 @@ type GetGestureByIDRequest struct {
 
 func (x *GetGestureByIDRequest) Reset() {
 	*x = GetGestureByIDRequest{}
-	mi := &file_gestures_gestures_proto_msgTypes[1]
+	mi := &file_gestures_gestures_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -127,7 +179,7 @@ func (x *GetGestureByIDRequest) String() string {
 func (*GetGestureByIDRequest) ProtoMessage() {}
 
 func (x *GetGestureByIDRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gestures_gestures_proto_msgTypes[1]
+	mi := &file_gestures_gestures_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -140,7 +192,7 @@ func (x *GetGestureByIDRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetGestureByIDRequest.ProtoReflect.Descriptor instead.
 func (*GetGestureByIDRequest) Descriptor() ([]byte, []int) {
-	return file_gestures_gestures_proto_rawDescGZIP(), []int{1}
+	return file_gestures_gestures_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *GetGestureByIDRequest) GetId() int64 {
@@ -159,7 +211,7 @@ type GetGestureByIDResponse struct {
 
 func (x *GetGestureByIDResponse) Reset() {
 	*x = GetGestureByIDResponse{}
-	mi := &file_gestures_gestures_proto_msgTypes[2]
+	mi := &file_gestures_gestures_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -171,7 +223,7 @@ func (x *GetGestureByIDResponse) String() string {
 func (*GetGestureByIDResponse) ProtoMessage() {}
 
 func (x *GetGestureByIDResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gestures_gestures_proto_msgTypes[2]
+	mi := &file_gestures_gestures_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -184,7 +236,7 @@ func (x *GetGestureByIDResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetGestureByIDResponse.ProtoReflect.Descriptor instead.
 func (*GetGestureByIDResponse) Descriptor() ([]byte, []int) {
-	return file_gestures_gestures_proto_rawDescGZIP(), []int{2}
+	return file_gestures_gestures_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *GetGestureByIDResponse) GetGesture() *Gesture {
@@ -196,13 +248,14 @@ func (x *GetGestureByIDResponse) GetGesture() *Gesture {
 
 type GetAllGesturesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	CategoryId    *int64                 `protobuf:"varint,1,opt,name=category_id,json=categoryId,proto3,oneof" json:"category_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetAllGesturesRequest) Reset() {
 	*x = GetAllGesturesRequest{}
-	mi := &file_gestures_gestures_proto_msgTypes[3]
+	mi := &file_gestures_gestures_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -214,7 +267,7 @@ func (x *GetAllGesturesRequest) String() string {
 func (*GetAllGesturesRequest) ProtoMessage() {}
 
 func (x *GetAllGesturesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gestures_gestures_proto_msgTypes[3]
+	mi := &file_gestures_gestures_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -227,7 +280,14 @@ func (x *GetAllGesturesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAllGesturesRequest.ProtoReflect.Descriptor instead.
 func (*GetAllGesturesRequest) Descriptor() ([]byte, []int) {
-	return file_gestures_gestures_proto_rawDescGZIP(), []int{3}
+	return file_gestures_gestures_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *GetAllGesturesRequest) GetCategoryId() int64 {
+	if x != nil && x.CategoryId != nil {
+		return *x.CategoryId
+	}
+	return 0
 }
 
 type GetAllGesturesResponse struct {
@@ -239,7 +299,7 @@ type GetAllGesturesResponse struct {
 
 func (x *GetAllGesturesResponse) Reset() {
 	*x = GetAllGesturesResponse{}
-	mi := &file_gestures_gestures_proto_msgTypes[4]
+	mi := &file_gestures_gestures_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -251,7 +311,7 @@ func (x *GetAllGesturesResponse) String() string {
 func (*GetAllGesturesResponse) ProtoMessage() {}
 
 func (x *GetAllGesturesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gestures_gestures_proto_msgTypes[4]
+	mi := &file_gestures_gestures_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -264,7 +324,7 @@ func (x *GetAllGesturesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAllGesturesResponse.ProtoReflect.Descriptor instead.
 func (*GetAllGesturesResponse) Descriptor() ([]byte, []int) {
-	return file_gestures_gestures_proto_rawDescGZIP(), []int{4}
+	return file_gestures_gestures_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *GetAllGesturesResponse) GetGestures() []*Gesture {
@@ -286,7 +346,7 @@ type CreateGestureRequest struct {
 
 func (x *CreateGestureRequest) Reset() {
 	*x = CreateGestureRequest{}
-	mi := &file_gestures_gestures_proto_msgTypes[5]
+	mi := &file_gestures_gestures_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -298,7 +358,7 @@ func (x *CreateGestureRequest) String() string {
 func (*CreateGestureRequest) ProtoMessage() {}
 
 func (x *CreateGestureRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gestures_gestures_proto_msgTypes[5]
+	mi := &file_gestures_gestures_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -311,7 +371,7 @@ func (x *CreateGestureRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateGestureRequest.ProtoReflect.Descriptor instead.
 func (*CreateGestureRequest) Descriptor() ([]byte, []int) {
-	return file_gestures_gestures_proto_rawDescGZIP(), []int{5}
+	return file_gestures_gestures_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *CreateGestureRequest) GetName() string {
@@ -351,7 +411,7 @@ type CreateGestureResponse struct {
 
 func (x *CreateGestureResponse) Reset() {
 	*x = CreateGestureResponse{}
-	mi := &file_gestures_gestures_proto_msgTypes[6]
+	mi := &file_gestures_gestures_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -363,7 +423,7 @@ func (x *CreateGestureResponse) String() string {
 func (*CreateGestureResponse) ProtoMessage() {}
 
 func (x *CreateGestureResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gestures_gestures_proto_msgTypes[6]
+	mi := &file_gestures_gestures_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -376,7 +436,7 @@ func (x *CreateGestureResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateGestureResponse.ProtoReflect.Descriptor instead.
 func (*CreateGestureResponse) Descriptor() ([]byte, []int) {
-	return file_gestures_gestures_proto_rawDescGZIP(), []int{6}
+	return file_gestures_gestures_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *CreateGestureResponse) GetId() int64 {
@@ -399,7 +459,7 @@ type UpdateGestureRequest struct {
 
 func (x *UpdateGestureRequest) Reset() {
 	*x = UpdateGestureRequest{}
-	mi := &file_gestures_gestures_proto_msgTypes[7]
+	mi := &file_gestures_gestures_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -411,7 +471,7 @@ func (x *UpdateGestureRequest) String() string {
 func (*UpdateGestureRequest) ProtoMessage() {}
 
 func (x *UpdateGestureRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gestures_gestures_proto_msgTypes[7]
+	mi := &file_gestures_gestures_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -424,7 +484,7 @@ func (x *UpdateGestureRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateGestureRequest.ProtoReflect.Descriptor instead.
 func (*UpdateGestureRequest) Descriptor() ([]byte, []int) {
-	return file_gestures_gestures_proto_rawDescGZIP(), []int{7}
+	return file_gestures_gestures_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *UpdateGestureRequest) GetId() int64 {
@@ -470,7 +530,7 @@ type UpdateGestureResponse struct {
 
 func (x *UpdateGestureResponse) Reset() {
 	*x = UpdateGestureResponse{}
-	mi := &file_gestures_gestures_proto_msgTypes[8]
+	mi := &file_gestures_gestures_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -482,7 +542,7 @@ func (x *UpdateGestureResponse) String() string {
 func (*UpdateGestureResponse) ProtoMessage() {}
 
 func (x *UpdateGestureResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gestures_gestures_proto_msgTypes[8]
+	mi := &file_gestures_gestures_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -495,7 +555,7 @@ func (x *UpdateGestureResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateGestureResponse.ProtoReflect.Descriptor instead.
 func (*UpdateGestureResponse) Descriptor() ([]byte, []int) {
-	return file_gestures_gestures_proto_rawDescGZIP(), []int{8}
+	return file_gestures_gestures_proto_rawDescGZIP(), []int{9}
 }
 
 type DeleteGestureRequest struct {
@@ -507,7 +567,7 @@ type DeleteGestureRequest struct {
 
 func (x *DeleteGestureRequest) Reset() {
 	*x = DeleteGestureRequest{}
-	mi := &file_gestures_gestures_proto_msgTypes[9]
+	mi := &file_gestures_gestures_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -519,7 +579,7 @@ func (x *DeleteGestureRequest) String() string {
 func (*DeleteGestureRequest) ProtoMessage() {}
 
 func (x *DeleteGestureRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gestures_gestures_proto_msgTypes[9]
+	mi := &file_gestures_gestures_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -532,7 +592,7 @@ func (x *DeleteGestureRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteGestureRequest.ProtoReflect.Descriptor instead.
 func (*DeleteGestureRequest) Descriptor() ([]byte, []int) {
-	return file_gestures_gestures_proto_rawDescGZIP(), []int{9}
+	return file_gestures_gestures_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *DeleteGestureRequest) GetId() int64 {
@@ -550,7 +610,7 @@ type DeleteGestureResponse struct {
 
 func (x *DeleteGestureResponse) Reset() {
 	*x = DeleteGestureResponse{}
-	mi := &file_gestures_gestures_proto_msgTypes[10]
+	mi := &file_gestures_gestures_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -562,7 +622,7 @@ func (x *DeleteGestureResponse) String() string {
 func (*DeleteGestureResponse) ProtoMessage() {}
 
 func (x *DeleteGestureResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gestures_gestures_proto_msgTypes[10]
+	mi := &file_gestures_gestures_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -575,28 +635,33 @@ func (x *DeleteGestureResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteGestureResponse.ProtoReflect.Descriptor instead.
 func (*DeleteGestureResponse) Descriptor() ([]byte, []int) {
-	return file_gestures_gestures_proto_rawDescGZIP(), []int{10}
+	return file_gestures_gestures_proto_rawDescGZIP(), []int{11}
 }
 
 var File_gestures_gestures_proto protoreflect.FileDescriptor
 
 const file_gestures_gestures_proto_rawDesc = "" +
 	"\n" +
-	"\x17gestures/gestures.proto\x12\bgestures\x1a\x1cgoogle/api/annotations.proto\"\xac\x01\n" +
+	"\x17gestures/gestures.proto\x12\bgestures\x1a\x1cgoogle/api/annotations.proto\"\xbb\x01\n" +
 	"\aGesture\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x1b\n" +
-	"\tvideo_url\x18\x04 \x01(\tR\bvideoUrl\x12\x1f\n" +
-	"\vcategory_id\x18\x05 \x01(\x03R\n" +
-	"categoryId\x12\x1d\n" +
+	"\tvideo_url\x18\x04 \x01(\tR\bvideoUrl\x12.\n" +
+	"\bcategory\x18\x05 \x01(\v2\x12.gestures.CategoryR\bcategory\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\x06 \x01(\tR\tcreatedAt\"'\n" +
+	"created_at\x18\x06 \x01(\tR\tcreatedAt\".\n" +
+	"\bCategory\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\"'\n" +
 	"\x15GetGestureByIDRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\"E\n" +
 	"\x16GetGestureByIDResponse\x12+\n" +
-	"\agesture\x18\x01 \x01(\v2\x11.gestures.GestureR\agesture\"\x17\n" +
-	"\x15GetAllGesturesRequest\"G\n" +
+	"\agesture\x18\x01 \x01(\v2\x11.gestures.GestureR\agesture\"M\n" +
+	"\x15GetAllGesturesRequest\x12$\n" +
+	"\vcategory_id\x18\x01 \x01(\x03H\x00R\n" +
+	"categoryId\x88\x01\x01B\x0e\n" +
+	"\f_category_id\"G\n" +
 	"\x16GetAllGesturesResponse\x12-\n" +
 	"\bgestures\x18\x01 \x03(\v2\x11.gestures.GestureR\bgestures\"\x8a\x01\n" +
 	"\x14CreateGestureRequest\x12\x12\n" +
@@ -637,38 +702,40 @@ func file_gestures_gestures_proto_rawDescGZIP() []byte {
 	return file_gestures_gestures_proto_rawDescData
 }
 
-var file_gestures_gestures_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_gestures_gestures_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_gestures_gestures_proto_goTypes = []any{
 	(*Gesture)(nil),                // 0: gestures.Gesture
-	(*GetGestureByIDRequest)(nil),  // 1: gestures.GetGestureByIDRequest
-	(*GetGestureByIDResponse)(nil), // 2: gestures.GetGestureByIDResponse
-	(*GetAllGesturesRequest)(nil),  // 3: gestures.GetAllGesturesRequest
-	(*GetAllGesturesResponse)(nil), // 4: gestures.GetAllGesturesResponse
-	(*CreateGestureRequest)(nil),   // 5: gestures.CreateGestureRequest
-	(*CreateGestureResponse)(nil),  // 6: gestures.CreateGestureResponse
-	(*UpdateGestureRequest)(nil),   // 7: gestures.UpdateGestureRequest
-	(*UpdateGestureResponse)(nil),  // 8: gestures.UpdateGestureResponse
-	(*DeleteGestureRequest)(nil),   // 9: gestures.DeleteGestureRequest
-	(*DeleteGestureResponse)(nil),  // 10: gestures.DeleteGestureResponse
+	(*Category)(nil),               // 1: gestures.Category
+	(*GetGestureByIDRequest)(nil),  // 2: gestures.GetGestureByIDRequest
+	(*GetGestureByIDResponse)(nil), // 3: gestures.GetGestureByIDResponse
+	(*GetAllGesturesRequest)(nil),  // 4: gestures.GetAllGesturesRequest
+	(*GetAllGesturesResponse)(nil), // 5: gestures.GetAllGesturesResponse
+	(*CreateGestureRequest)(nil),   // 6: gestures.CreateGestureRequest
+	(*CreateGestureResponse)(nil),  // 7: gestures.CreateGestureResponse
+	(*UpdateGestureRequest)(nil),   // 8: gestures.UpdateGestureRequest
+	(*UpdateGestureResponse)(nil),  // 9: gestures.UpdateGestureResponse
+	(*DeleteGestureRequest)(nil),   // 10: gestures.DeleteGestureRequest
+	(*DeleteGestureResponse)(nil),  // 11: gestures.DeleteGestureResponse
 }
 var file_gestures_gestures_proto_depIdxs = []int32{
-	0,  // 0: gestures.GetGestureByIDResponse.gesture:type_name -> gestures.Gesture
-	0,  // 1: gestures.GetAllGesturesResponse.gestures:type_name -> gestures.Gesture
-	1,  // 2: gestures.Gestures.GetByID:input_type -> gestures.GetGestureByIDRequest
-	3,  // 3: gestures.Gestures.GetAll:input_type -> gestures.GetAllGesturesRequest
-	5,  // 4: gestures.Gestures.Create:input_type -> gestures.CreateGestureRequest
-	7,  // 5: gestures.Gestures.Update:input_type -> gestures.UpdateGestureRequest
-	9,  // 6: gestures.Gestures.Delete:input_type -> gestures.DeleteGestureRequest
-	2,  // 7: gestures.Gestures.GetByID:output_type -> gestures.GetGestureByIDResponse
-	4,  // 8: gestures.Gestures.GetAll:output_type -> gestures.GetAllGesturesResponse
-	6,  // 9: gestures.Gestures.Create:output_type -> gestures.CreateGestureResponse
-	8,  // 10: gestures.Gestures.Update:output_type -> gestures.UpdateGestureResponse
-	10, // 11: gestures.Gestures.Delete:output_type -> gestures.DeleteGestureResponse
-	7,  // [7:12] is the sub-list for method output_type
-	2,  // [2:7] is the sub-list for method input_type
-	2,  // [2:2] is the sub-list for extension type_name
-	2,  // [2:2] is the sub-list for extension extendee
-	0,  // [0:2] is the sub-list for field type_name
+	1,  // 0: gestures.Gesture.category:type_name -> gestures.Category
+	0,  // 1: gestures.GetGestureByIDResponse.gesture:type_name -> gestures.Gesture
+	0,  // 2: gestures.GetAllGesturesResponse.gestures:type_name -> gestures.Gesture
+	2,  // 3: gestures.Gestures.GetByID:input_type -> gestures.GetGestureByIDRequest
+	4,  // 4: gestures.Gestures.GetAll:input_type -> gestures.GetAllGesturesRequest
+	6,  // 5: gestures.Gestures.Create:input_type -> gestures.CreateGestureRequest
+	8,  // 6: gestures.Gestures.Update:input_type -> gestures.UpdateGestureRequest
+	10, // 7: gestures.Gestures.Delete:input_type -> gestures.DeleteGestureRequest
+	3,  // 8: gestures.Gestures.GetByID:output_type -> gestures.GetGestureByIDResponse
+	5,  // 9: gestures.Gestures.GetAll:output_type -> gestures.GetAllGesturesResponse
+	7,  // 10: gestures.Gestures.Create:output_type -> gestures.CreateGestureResponse
+	9,  // 11: gestures.Gestures.Update:output_type -> gestures.UpdateGestureResponse
+	11, // 12: gestures.Gestures.Delete:output_type -> gestures.DeleteGestureResponse
+	8,  // [8:13] is the sub-list for method output_type
+	3,  // [3:8] is the sub-list for method input_type
+	3,  // [3:3] is the sub-list for extension type_name
+	3,  // [3:3] is the sub-list for extension extendee
+	0,  // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_gestures_gestures_proto_init() }
@@ -676,13 +743,14 @@ func file_gestures_gestures_proto_init() {
 	if File_gestures_gestures_proto != nil {
 		return
 	}
+	file_gestures_gestures_proto_msgTypes[4].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_gestures_gestures_proto_rawDesc), len(file_gestures_gestures_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

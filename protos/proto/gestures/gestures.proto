@@ -42,8 +42,13 @@ message Gesture {
     string name = 2;
     string description = 3;
     string video_url = 4;
-    int64 category_id = 5;
+    Category category = 5; 
     string created_at = 6; // ISO-8601 string.
+}
+
+message Category {
+    int64 id = 1;
+    string name = 2;
 }
 
 message GetGestureByIDRequest {
@@ -54,7 +59,9 @@ message GetGestureByIDResponse {
     Gesture gesture = 1;
 }
 
-message GetAllGesturesRequest {}
+message GetAllGesturesRequest {
+    optional int64 category_id = 1;
+}
 
 message GetAllGesturesResponse {
     repeated Gesture gestures = 1;
